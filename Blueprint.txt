@@ -1,8 +1,148 @@
-Tech Stack
+~EARTHBUDDY~
 
-Language- Python
-Framework- FastAPI
-DataBase- SQLite
-Server- uvicorn
+Core Features:
+                    -User Registration & Login (Auth System)
+                    -Ecological Task Completion with Image Proof
+                    -AI Verification of Submitted Images
+                    -Points System based on Task Completion
+                    -Leaderboard (Daily Rankings + Monthly Winner)
+                    -Profile Page (Completed Tasks, Points, Badges)
+                    -Environment News Section (NewsAPI)
 
 
+API Endpoints:
+-POST /auth/register            → Register new user
+-POST /auth/login               → Login and receive JWT token
+-GET  /tasks/all                → Get all available tasks (will be protected)
+-POST /tasks/complete           → Submit task with image proof (will be protected)
+-GET  /leaderboard              → Get ranked list of users by points (will be protected)
+-GET  /profile                  → Get logged-in user's tasks, points, badges (will be protected)
+-GET  /news                     → Get latest environment news (will be protected)
+
+
+Logic:
+Client Request → FastAPI Route → JWT Verification (will have protected routes) → Pydantic Validation → Business Logic → Database Operation → Response
+
+
+Tech Stack:
+-FastAPI     → API framework for handling routes and requests
+-SQLite      → Database for storing users, tasks, completions
+-Pydantic    → Data validation and schema enforcement (auth routes only)
+-Uvicorn     → ASGI server used to run the FastAPI application locally
+
+
+Authentication:
+-passlib[bcrypt]          → Password hashing and verification
+-python-jose[cryptography]→ JWT token generation and verification
+-OAuth2PasswordBearer     → Token extraction from request headers
+-Depends()                → FastAPI dependency injection for protected routes
+
+
+Server:
+-Uvicorn → ASGI server used to run the FastAPI application locally
+
+
+Framework:
+-FastAPI → Handles API creation, routing, and request/response cycle
+
+
+Libraries Used:
+sqlite3       → Database connection and SQL operations
+passlib       → Password hashing using bcrypt scheme
+jose          → JWT token encoding and decoding
+datetime      → Token expiry time calculation
+fastapi       → Core framework, APIRouter, Depends, HTTPException
+pydantic      → BaseModel for request schema validation
+requests      → Calling external APIs (NewsAPI, aiornot)
+
+
+Classes / Components Used:
+->From FastAPI:-
+    FastAPI            → Creates the application instance
+    APIRouter         → Creates modular route groups per feature
+    Depends           → Injects dependencies into route functions
+    HTTPException     → Handles API error responses
+
+->From Pydantic:-
+    BaseModel         → Defines request schemas for auth routes
+
+->From Custom Auth:-
+    RegisterUser      → Input model for registration
+    LoginUser         → Input model for login
+
+->From Database Layer:-
+    sqlite3.connect   → Manages database connection
+    sqlite3.Cursor    → Executes SQL queries
+    row_factory       → Returns rows as dictionaries
+
+
+Database Design:
+Table: users
+->Fields:
+    id           → Unique identifier (AUTOINCREMENT)
+    name         → Full name of user
+    username     → Unique username (UNIQUE constraint)
+    password     → Bcrypt hashed password
+
+Table: tasks
+->Fields:
+    id           → Unique identifier (AUTOINCREMENT)
+    title        → Name of the ecological task
+    category     → Task category (Waste, Air Quality, Water, Green Cover)
+    description  → What proof user needs to submit
+    points       → Points awarded on verified completion
+
+Table: completions
+->Fields:
+    id           → Unique identifier (AUTOINCREMENT)
+    user_id      → References users(id)
+    task_id      → References tasks(id)
+    image_path   → Local path to uploaded image
+    verified     → AI verification result (0 = rejected, 1 = approved)
+    completed_at → Timestamp of completion (DEFAULT CURRENT_TIMESTAMP)
+
+
+Special Features:-
+->AI Image Verification-
+    Uses aiornot.com API
+    Image submitted with task → sent to API → returns real/AI probability
+    If real → verified = 1 → points awarded
+    If AI generated → verified = 0 → points not awarded
+
+->Points System-
+    Points not stored as raw number
+    Computed dynamically via SQL SUM query on verified completions
+    Prevents tampering and always stays accurate
+
+->Leaderboard-
+    Computed from completions table using GROUP BY and ORDER BY
+    Returns ranked list of users with total points
+    Monthly winner = user with highest points in current month
+
+->Badges-
+    Awarded based on total points thresholds
+    Computed at profile fetch time, not stored separately
+    Example thresholds:
+        100 pts  → Green Starter
+        300 pts  → Eco Warrior
+        600 pts  → Planet Guardian
+
+->News Section-
+    Uses NewsAPI.org free tier
+    Keywords: "environment pollution climate"
+    Returns latest articles as JSON to frontend
+    Fallback to global environment news if needed
+
+
+Project Structure:
+earthbuddy/
+    main.py                  → App entry point, includes all routers
+    db.py                    → DB connection and table creation + seeding
+    auth.py                  → Password hashing and JWT logic
+    .gitignore               → Excludes cache, db, env, venv
+    routes/
+        auth_routes.py       → Register and Login endpoints
+        task_routes.py       → Get tasks and Submit completion
+        leaderboard_routes.py→ Rankings and monthly winner
+        profile_routes.py    → User profile, points, badges
+        news_routes.py       → Environment news from NewsAPI
