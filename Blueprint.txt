@@ -1,0 +1,6 @@
+Tech Stack
+
+Language- Python
+Framework- FastAPI
+DataBase- SQLite
+Server- uvicorn
