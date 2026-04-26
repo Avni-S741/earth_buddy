@@ -1,9 +1,18 @@
 from fastapi import FastAPI
 from db import init_db,seed_tasks
+from fastapi.middleware.cors import CORSMiddleware
 from routes.auth_routes import router as auth_router
 from routes.tasks_routes import router as task_router
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 init_db()
 seed_tasks()
