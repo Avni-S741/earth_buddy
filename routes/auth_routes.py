@@ -10,6 +10,7 @@ class RegisterUser(BaseModel):
     name: str
     username: str
     password: str
+    email: str
 
 @router.post("/register")
 def register(user: RegisterUser):
@@ -18,8 +19,8 @@ def register(user: RegisterUser):
 
     try:
         cursor.execute(
-            "INSERT INTO users (name, username, password) VALUES (?, ?, ?)",
-            (user.name, user.username, hash_password(user.password))
+            "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?)",
+            (user.name, user.username, hash_password(user.password),user.email)
         )
         connect_db.commit()
         return {"message": "Account created successfully"}
