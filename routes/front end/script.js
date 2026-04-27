@@ -48,8 +48,8 @@ loginForm.addEventListener("submit", async (e) => {
       loginMessage.style.color = "#b6ff2e";
       loginMessage.textContent = "Login successful!";
       setTimeout(() => {
-    window.location.href = "dashboard.html";
-  }, 1000); // small delay so user sees message
+    window.location.href = "leaderboard.html";
+  }, 1000); 
 
     } else {
       loginMessage.style.color = "#ff5dcf";

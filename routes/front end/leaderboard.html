@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earth Buddy | Leaderboard</title>
+  <link rel="stylesheet" href="leaderboard.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="top-header">
+
+  <!-- 🔝 ROW 1 -->
+  <div class="header-top">
+    <div class="brand-section">
+      <img src="images/earth buddy logo2.png" class="logo" />
+      <div class="brand-text">
+        <h1>Earth Buddy</h1>
+        <p class="tagline"> Be the Buddy Earth Needs </p>
+      </div>
+    </div>
+
+    <nav class="top-nav">
+      <a href="dashboard.html">Tasks</a>
+      <a href="leaderboard.html" class="active">Leaderboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+
+  <!-- 🔻 ROW 2 -->
+  <div class="header-bottom">
+    <h2>🏆 Leaderboard</h2>
+  </div>
+
+</header>
+
+    <main class="leaderboard-layout">
+      <aside class="side-visual left-visual">
+        <div class="earth-card">
+          <div class="earth-face">🌍</div>
+          <h3>Save the planet</h3>
+          <p>Every completed task counts.</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <span class="badge">Gamified Progress</span>
+            <h2>Top Earth Heroes</h2>
+            <p>Compete, climb, and help your team build a greener future.</p>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <span id="totalUsers">0</span>
+              <label>Active Users</label>
+            </div>
+            <div class="stat-box">
+              <span id="topScore">0</span>
+              <label>Top Score</label>
+            </div>
+            <div class="stat-box">
+              <span id="yourRank">—</span>
+              <label>Your Rank</label>
+            </div>
+          </div>
+        </section>
+
+        <section class="top-three-section">
+          <div class="top-three-grid" id="topThreeCards">
+            <div class="loading-card">Loading top users...</div>
+          </div>
+        </section>
+
+        <section class="table-section">
+          <div class="section-heading">
+            <h3>Full Ranking</h3>
+            <button id="refreshBtn" class="refresh-btn">Refresh</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>User</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody">
+                <tr>
+                  <td colspan="3" class="loading-row">Loading leaderboard...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="errorBox" class="error-box hidden"></div>
+        </section>
+      </section>
+
+      <aside class="side-visual right-visual">
+        <div class="earth-card">
+          <div class="earth-face">🌱</div>
+          <h3>Grow together</h3>
+          <p>Small actions build big impact.</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>
