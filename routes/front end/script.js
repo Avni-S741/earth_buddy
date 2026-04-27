@@ -60,6 +60,8 @@ loginForm.addEventListener("submit", async (e) => {
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  
+  const email = document.getElementById("registerEmail").value.trim();
   const name = document.getElementById("registerName").value.trim();
   const username = document.getElementById("registerUsername").value.trim();
   const password = document.getElementById("registerPassword").value;
