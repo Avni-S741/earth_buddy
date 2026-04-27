@@ -28,3 +28,7 @@ def get_leaderboard(current_user:str=Depends(verify_token)):
         )
 
     return { "leaderboard" : leaderboard }
+
+# fetch("http://127.0.0.1:8000/leaderboard/", {
+#     headers: {"Authorization": "Bearer YOUR_TOKEN_HERE"}
+# }).then(r => r.json()).then(d => console.log(d))

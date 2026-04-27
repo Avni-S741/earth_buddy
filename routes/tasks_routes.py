@@ -33,6 +33,10 @@ def get_all_tasks (current_user: str= Depends(verify_token)):
 
     return {"tasks":[dict(task) for task in tasks] }
 
+# fetch("http://127.0.0.1:8000/tasks/all", {
+#     headers: {"Authorization": "Bearer YOUR_TOKEN_HERE"}
+# }).then(r => r.json()).then(d => console.log(d))
+
 
 @router.post("/complete")
 def complete_task(task_id:int=Form(...),
@@ -71,3 +75,18 @@ def complete_task(task_id:int=Form(...),
     else:
         return {"verified": False, "msg":"Image appears ai. Hence no points will be awarded..."}
     
+
+# const formData = new FormData()
+# formData.append("task_id", 1)
+# const fileInput = document.createElement('input')
+# fileInput.type = 'file'
+# fileInput.onchange = async (e) => {
+#     formData.append("image", e.target.files[0])
+#     const r = await fetch("http://127.0.0.1:8000/tasks/complete", {
+#         method: "POST",
+#         headers: {"Authorization": "Bearer YOUR_TOKEN_HERE"},
+#         body: formData
+#     })
+#     console.log(await r.json())
+# }
+# fileInput.click()

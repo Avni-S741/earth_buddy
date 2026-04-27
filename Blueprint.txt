@@ -146,3 +146,6 @@ earthbuddy/
         leaderboard_routes.py→ Rankings and monthly winner
         profile_routes.py    → User profile, points, badges
         news_routes.py       → Environment news from NewsAPI
+
+
+

@@ -19,7 +19,7 @@ def register(user: RegisterUser):
 
     try:
         cursor.execute(
-            "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?)",
+            "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?)",
             (user.name, user.username, hash_password(user.password),user.email)
         )
         connect_db.commit()
