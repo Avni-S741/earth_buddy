@@ -32,7 +32,7 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("loginPassword").value;
 
   try {
-    const response = await fetch(`${API_BASE}/login`, {
+    const response = await fetch(`${API_BASE}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -47,6 +47,10 @@ loginForm.addEventListener("submit", async (e) => {
       localStorage.setItem("username", data.username);
       loginMessage.style.color = "#b6ff2e";
       loginMessage.textContent = "Login successful!";
+      setTimeout(() => {
+    window.location.href = "dashboard.html";
+  }, 1000); // small delay so user sees message
+
     } else {
       loginMessage.style.color = "#ff5dcf";
       loginMessage.textContent = data.error || "Login failed";
@@ -67,12 +71,12 @@ registerForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("registerPassword").value;
 
   try {
-    const response = await fetch(`${API_BASE}/register`, {
+    const response = await fetch(`${API_BASE}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name, username, password })
+      body: JSON.stringify({ email, name, username, password })
     });
 
     const data = await response.json();
