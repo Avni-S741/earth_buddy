@@ -15,7 +15,8 @@ def init_db():
     id  INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     username TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL 
+    password TEXT NOT NULL ,
+    email TEXT UNIQUE NOT NULL
     );
     ''')
     cursor.execute('''
