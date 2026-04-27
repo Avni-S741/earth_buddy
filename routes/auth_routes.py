@@ -7,10 +7,11 @@ from auth import hash_password, create_token, verify_password, verify_token
 router = APIRouter()
 
 class RegisterUser(BaseModel):
+    email: str
     name: str
     username: str
     password: str
-    email: str
+    
 
 @router.post("/register")
 def register(user: RegisterUser):
@@ -19,8 +20,8 @@ def register(user: RegisterUser):
 
     try:
         cursor.execute(
-            "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?)",
-            (user.name, user.username, hash_password(user.password),user.email)
+            "INSERT INTO users ( email, name, username, password) VALUES (?, ?, ?, ?)",
+            (user.email, user.name, user.username, hash_password(user.password))
         )
         connect_db.commit()
         return {"message": "Account created successfully"}

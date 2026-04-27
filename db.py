@@ -76,7 +76,6 @@ def seed_tasks():
 
     # Water Conservation
     ("Fix a Leaking Tap", "Water Conservation", "Fix or report a leaking tap at home or in public. Upload a photo of the fixed tap.", 60),
-    ("Take a Short Shower", "Water Conservation", "Limit your shower to under 5 minutes today. Upload a photo of a timer as proof.", 30),
     ("Rainwater Collection", "Water Conservation", "Set up a rainwater collection container at home. Upload a photo.", 90),
     ("Reuse Water", "Water Conservation", "Reuse water from washing vegetables or rice to water plants. Upload a photo.", 40),
     ("Turn Off Tap While Brushing", "Water Conservation", "Turn off the tap while brushing teeth for a full day. Upload a photo as reminder note.", 20),
