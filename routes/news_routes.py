@@ -7,16 +7,16 @@ router=APIRouter()
 NEWS_API_KEY="84a73c2ef30b4ddf9aea9eefbbf6e066"
 @router.get("/")
 def get_news(current_user:str=Depends(verify_token)):
-    response=requests.get("https://api.aiornot.com/v1/reports/image",
+    response=requests.get("https://newsapi.org/v2/top-headlines",
                         params={
-                        "q":"environment pollution climate change deforestation",
+                        "category":"science",
                         "language":"en",
-                        "sortBy": "publishedAt",
                         "pageSize": 10,
                         "apiKey": NEWS_API_KEY
                     })
     
     data = response.json()
+    print(data)
     articles = data.get("articles", [])
 
     news = []
