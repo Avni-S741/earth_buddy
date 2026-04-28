@@ -5,6 +5,7 @@ from routes.auth_routes import router as auth_router
 from routes.tasks_routes import router as task_router
 from routes.leaderboard_routes import router as leaderboard_router
 from routes.news_routes import router as news_router 
+from routes.profile_routes import router as profile_router
 
 
 app=FastAPI()
@@ -24,3 +25,4 @@ app.include_router(auth_router, prefix= "/auth")
 app.include_router(task_router, prefix= "/tasks")
 app.include_router(leaderboard_router, prefix= "/leaderboard")
 app.include_router(news_router,prefix="/news")
+app.include_router(profile_router,prefix="/profile")
