@@ -33,6 +33,22 @@ a {
   text-decoration: none;
 }
 
+.app-name {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+  color: #b6ff2e; /* eco neon green */
+}
+
+.tagline {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: #dcdcdc;
+  opacity: 0.9;
+}
+
 .page-shell {
   width: 100%;
   min-height: 100vh;
@@ -92,6 +108,8 @@ a {
 /* 🔝 TOP ROW */
 .header-top {
   display: flex;
+  margin-top: 15px;
+  padding: 22px 22px;
   justify-content: space-between;
   align-items: center;
 }
@@ -116,7 +134,7 @@ a {
 }
 
 .top-nav a {
-  padding: 10px 16px;
+  padding: 21px 22px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);

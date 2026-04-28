@@ -65,6 +65,21 @@ body {
   color: #b6ff2e;
   text-shadow: 0 0 10px rgba(182, 255, 46, 0.35);
 }
+.app-name {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+  color: #b6ff2e; /* eco neon green */
+}
+
+.tagline {
+  font-family: 'Audiowide', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: #dcdcdc;
+  opacity: 0.9;
+}
 
 .brand-header p {
   margin-top: 6px;

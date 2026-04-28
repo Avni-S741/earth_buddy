@@ -109,3 +109,9 @@ async function loadLeaderboard() {
 refreshBtn.addEventListener("click", loadLeaderboard);
 
 loadLeaderboard();
+document.addEventListener("DOMContentLoaded", () => {
+  const leaderboardBtn = document.getElementById("leaderboardBtn");
+  if (leaderboardBtn) {
+    leaderboardBtn.classList.add("active");
+  }
+});

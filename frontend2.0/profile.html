@@ -1,0 +1,76 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earth Buddy | Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="top-header">
+
+  <!-- 🔝 ROW 1 -->
+  <div class="header-top">
+    <div class="brand-section">
+      <img src="images/earth buddy logo2.png" class="logo" />
+      <div class="brand-text">
+        <h1 class="app-name">Earth Buddy</h1>
+        <p class="tagline"> Be the Buddy Earth Needs </p>
+      </div>
+    </div>
+
+    <nav class="top-nav">
+      <a href="dashboard.html">Tasks</a>
+      <a href="leaderboard.html" >Leaderboard</a>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+
+  <!-- 🔻 ROW 2 -->
+  <div class="header-bottom">
+    <h2> My Profile</h2>
+  </div>
+
+</header>
+
+  <!-- PROFILE SECTION -->
+  <section class="profile-container">
+
+    <div class="profile-card">
+      <h2 id="name"></h2>
+      <p id="username"></p>
+      <p id="email"></p>
+
+      <div class="stats">
+        <div class="stat-box">
+          <h3 id="points">0</h3>
+          <p>Total Points</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="badges-card">
+      <h3>🏆 Badges</h3>
+      <div id="badgesList"></div>
+    </div>
+
+    
+    <div class="tasks-card">
+      <h3>📜 Completed Tasks</h3>
+      <div id="tasksList"></div>
+    </div>
+
+    <!-- LOGOUT -->
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+  </section>
+
+  <script src="profile.js"></script>
+</body>
+</html>

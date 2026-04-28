@@ -5,7 +5,37 @@ const registerForm = document.getElementById("registerForm");
 const loginMessage = document.getElementById("loginMessage");
 const registerMessage = document.getElementById("registerMessage");
 
-const API_BASE = "http://127.0.0.1:8000"; // change if your backend runs on a different port
+function parseJwt(token) {
+  try {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(base64));
+  } catch (error) {
+    return null;
+  }
+}
+
+const savedToken = localStorage.getItem("token");
+
+if (savedToken) {
+  const decoded = parseJwt(savedToken);
+
+  if (!decoded || !decoded.exp) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+  } else {
+    const currentTime = Date.now() / 1000;
+
+    if (decoded.exp > currentTime) {
+      window.location.href = "leaderboard.html";
+    } else {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+    }
+  }
+}
+
+const API_BASE = "http://127.0.0.1:8000"; // port id if it needs to be changed, 
 
 loginTab.addEventListener("click", () => {
   loginTab.classList.add("active");
