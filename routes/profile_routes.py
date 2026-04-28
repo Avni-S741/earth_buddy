@@ -45,6 +45,7 @@ def get_profile(current_user:str=Depends(verify_token)):
     connect_db.close()
 
     return {
+        "email":user["email"],
         "username":user["username"],
         "name":user["name"],
         "total_points":total_points,
