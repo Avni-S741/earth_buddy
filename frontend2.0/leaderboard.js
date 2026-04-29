@@ -83,6 +83,7 @@ async function loadLeaderboard() {
       throw new Error(`Server responded with ${response.status}`);
     }
 
+    // --- EVERYTHING BELOW THIS LINE IS WHAT YOU ARE REPLACING ---
     const data = await response.json();
     const leaderboard = data.leaderboard || [];
 
@@ -92,9 +93,14 @@ async function loadLeaderboard() {
     totalUsersEl.textContent = leaderboard.length;
     topScoreEl.textContent = leaderboard.length ? leaderboard[0].total_points : "0";
 
+    // UPDATED: Case-insensitive search for your rank
     const username = localStorage.getItem("username");
-    const me = leaderboard.find(user => user.username === username);
+    const me = leaderboard.find(user => 
+        user.username.toLowerCase() === (username || "").toLowerCase()
+    );
     yourRankEl.textContent = me ? `#${me.rank}` : "—";
+    // --- END OF REPLACEMENT ---
+
   } catch (error) {
     console.error("Failed to load leaderboard:", error);
     showError("Could not load leaderboard. Please try again.");
@@ -108,7 +114,7 @@ async function loadLeaderboard() {
 
 
 
-loadLeaderboard();
+
 document.addEventListener("DOMContentLoaded", () => {
   const leaderboardBtn = document.getElementById("leaderboardBtn");
   if (leaderboardBtn) {
