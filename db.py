@@ -40,6 +40,8 @@ def init_db():
     FOREIGN KEY (task_id) REFERENCES tasks(id) )
     ''')
 
+    # cursor.execute("SELECT * FROM completions")
+
     connect_db.commit()
     connect_db.close()
 
