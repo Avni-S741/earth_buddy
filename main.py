@@ -25,3 +25,6 @@ app.include_router(auth_router, prefix= "/auth")
 app.include_router(task_router, prefix= "/tasks")
 app.include_router(leaderboard_router, prefix= "/leaderboard")
 app.include_router(profile_router,prefix="/profile")
+
+# for route in app.routes:
+#     print(route.path, route.methods)

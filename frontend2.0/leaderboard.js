@@ -40,30 +40,43 @@ async function fetchLeaderboard() {
 
 // 📊 Render full table
 function renderLeaderboard(data) {
-  leaderboardBody.innerHTML = "";
+    const currentUsername = localStorage.getItem("username");
+    leaderboardBody.innerHTML = "";
 
-  if (data.length === 0) {
-    leaderboardBody.innerHTML =
-      `<tr><td colspan="3">No data available</td></tr>`;
-    return;
-  }
-
-  data.forEach(user => {
-
-     let rowClass = "";
-    if (user.username === currentUsername) {
-      rowClass = "highlight-row";
+    if (data.length === 0) {
+        leaderboardBody.innerHTML = `<tr><td colspan="3">No data available</td></tr>`;
+        return;
     }
-    
-    const row = `
-      <tr>
-        <td class="rank-cell">#${user.rank}</td>
-        <td class="username-cell">${user.username}</td>
-        <td class="points-cell">${user.total_points}</td>
-      </tr>
-    `;
-    leaderboardBody.innerHTML += row;
-  });
+
+    data.forEach(user => {
+        const row = document.createElement("tr");
+        
+        // Add rank cell
+        const rankCell = document.createElement("td");
+        rankCell.className = "rank-cell";
+        rankCell.textContent = `#${user.rank}`;
+        row.appendChild(rankCell);
+        
+        // Add username cell
+        const usernameCell = document.createElement("td");
+        usernameCell.className = "username-cell";
+        usernameCell.textContent = user.username;
+        row.appendChild(usernameCell);
+        
+        // Add points cell
+        const pointsCell = document.createElement("td");
+        pointsCell.className = "points-cell";
+        pointsCell.textContent = user.total_points;
+        row.appendChild(pointsCell);
+        
+        // Highlight current user's row
+        if (user.username === currentUsername) {
+            row.style.backgroundColor = "rgba(182, 255, 46, 0.15)";
+            row.style.borderLeft = "3px solid #b6ff2e";
+        }
+        
+        leaderboardBody.appendChild(row);
+    });
 }
 
 // 🏆 Top 3 cards
