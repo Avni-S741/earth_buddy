@@ -27,7 +27,7 @@ if (savedToken) {
     const currentTime = Date.now() / 1000;
 
     if (decoded.exp > currentTime) {
-      window.location.href = "dashboard.html";
+      window.location.href = "tasks.html";
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
