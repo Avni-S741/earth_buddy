@@ -27,7 +27,7 @@ if (savedToken) {
     const currentTime = Date.now() / 1000;
 
     if (decoded.exp > currentTime) {
-      window.location.href = "leaderboard.html";
+      window.location.href = "dashboard.html";
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
@@ -78,7 +78,7 @@ loginForm.addEventListener("submit", async (e) => {
       loginMessage.style.color = "#b6ff2e";
       loginMessage.textContent = "Login successful!";
       setTimeout(() => {
-    window.location.href = "leaderboard.html";
+    window.location.href = "dashboard.html";
   }, 1000); 
 
     } else {
