@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Earth Buddy | Support</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="support.css"/>
+</head>
+
+<body>
+<div class="page-shell">
+
+<!-- HEADER (same as yours) -->
+<header class="top-header">
+  <div class="header-top">
+    <div class="brand-section">
+      <img src="images/earth buddy logo2.png" class="logo" />
+      <div class="brand-text">
+        <h1 class="app-name">Earth Buddy</h1>
+        <p class="tagline">Be the Buddy Earth Needs</p>
+      </div>
+    </div>
+
+    <nav class="top-nav">
+      <a href="dashboard.html">Tasks</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="support.html" class="active">Support</a>
+    </nav>
+  </div>
+
+  <div class="header-bottom">
+    <h2>💬 Support Center</h2>
+  </div>
+</header>
+
+<!-- QUICK HELP -->
+<section class="card">
+  <h3>Quick Help</h3>
+
+  <input type="text" id="searchHelp" placeholder="What do you need help with?" class="search-box"/>
+
+  <div class="quick-help">
+
+  <div class="help-item">
+    <strong>✅ How to complete a task?</strong>
+    <p>Choose a task, complete it, and upload a valid image as proof.</p>
+  </div>
+
+  <div class="help-item">
+    <strong>❌ Why was my image rejected?</strong>
+    <p>Your image may not follow guidelines or may be AI-generated.</p>
+  </div>
+
+</div>
+</section>
+
+<!-- MAIN GRID -->
+<div class="support-grid">
+
+  <!-- FAQ -->
+  <section class="card">
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+      <div class="faq-question">How are points calculated?</div>
+      <div class="faq-answer">Points are awarded based on the predefined task values and are automatically added to your profile upon verification.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Why was my submission rejected?</div>
+      <div class="faq-answer">Submissions may be rejected if the image appears AI-generated or does not match the selected task category.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can I re-upload a task?</div>
+      <div class="faq-answer">Yes, you can re-upload a task with valid proof if your previous submission was rejected.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What kind of images are allowed?</div>
+      <div class="faq-answer">Only JPG and JPEG image formats are accepted.</div>
+    </div>
+
+  </section>
+
+  <!-- SIDE COLUMN -->
+  <div class="side-column">
+
+    <!-- CONTACT -->
+    <section class="card">
+      <h3>Contact Support</h3>
+
+      <p>Email us:</p>
+      <a href="mailto:support@earthbuddy.com" class="link">support@earthbuddy.com</a>
+
+      <p>Call us:</p>
+      <a href="tel:+919999999999" class="link">+91 99999 99999</a>
+    </section>
+
+    <!-- RULES -->
+    <section class="card">
+      <h3>Rules Reminder</h3>
+      <ul class="rules">
+        <li>No AI-generated images</li>
+        <li>No duplicate uploads</li>
+        <li>Only JPG/JPEG formats allowed</li>
+        <li>Final judgement is absolute</li>
+      </ul>
+    </section>
+
+    <!-- ECO TIP -->
+    <section class="card">
+      <h3>💚 Eco Tip of the Day</h3>
+      <p id="ecoTip">Loading tip...</p>
+    </section>
+
+  </div>
+
+</div>
+
+</div>
+
+<script src="support.js"></script>
+</body>
+</html>

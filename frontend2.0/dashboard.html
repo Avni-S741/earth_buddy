@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earth Buddy | Tasks</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="top-header">
+      <div class="header-top">
+        <div class="brand-section">
+          <img src="images/earth buddy logo2.png" class="logo" alt="Earth Buddy Logo" />
+          <div class="brand-text">
+            <h1 class="app-name">Earth Buddy</h1>
+            <p class="tagline">Be the Buddy Earth Needs</p>
+          </div>
+        </div>
+
+        <nav class="top-nav">
+          <a href="dashboard.html" class="active">Tasks</a>
+          <a href="leaderboard.html">Leaderboard</a>
+          <a href="profile.html">Profile</a>
+          <a href="support.html">Support</a>
+        </nav>
+      </div>
+
+      <div class="header-bottom">
+        <h2>✅ Tasks</h2>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <section class="task-table-card">
+        <div class="section-head">
+          <div>
+            <h3>Available Tasks</h3>
+            <p>Select a task, upload a JPG/JPEG proof, and submit for verification.</p>
+          </div>
+          <div class="small-pill" id="taskCount">0 tasks</div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="task-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Points</th>
+                <th>Upload Proof</th>
+                <th>Action</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tasksBody">
+              <tr>
+                <td colspan="7" class="loading-cell">Loading tasks...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="side-column">
+        <section class="info-card">
+          <h3>Rule Set</h3>
+          <div class="rule-list">
+            <div class="rule-item">1. No images should be AI-generated</div>
+            <div class="rule-item">2. The same photo cannot be uploaded again</div>
+            <div class="rule-item">3. Only JPG and JPEG files are allowed</div>
+            <div class="rule-item">4. Final judgement and points awarded are absolute</div>
+          </div>
+          <p class="note">
+            AI detection and duplicate-photo checks are enforced.
+          </p>
+        </section>
+
+        <section class="info-card">
+          <h3>Badge Milestones</h3>
+          <div class="badge-grid">
+           <div class="badge-grid">
+
+  <div class="badge-card">
+    <img src="images/eco-initiate.png" class="badge-img" />
+    <span class="badge-points">500 pts</span>
+    <strong>Eco Initiate  </strong>
+  </div>
+
+  <div class="badge-card">
+    <img src="images/green-guardian.png" class="badge-img" />
+    <span class="badge-points">1500 pts</span>
+    <strong>Green Guardian</strong>
+  </div>
+
+  <div class="badge-card">
+    <img src="images/earth-defender.png" class="badge-img" />
+    <span class="badge-points">3500 pts</span>
+    <strong>Earth Defender</strong>
+  </div>
+
+  <div class="badge-card">
+    <img src="images/planet-protector.png" class="badge-img" />
+    <span class="badge-points">5000 pts</span>
+    <strong>Planet Protector</strong>
+  </div>
+
+</div>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

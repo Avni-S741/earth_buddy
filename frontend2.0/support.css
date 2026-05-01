@@ -1,0 +1,159 @@
+@import url("dashboard.css");
+
+/* reuse your theme */
+
+.card {
+  background: rgba(15,15,15,0.9);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.4);
+  transition: 0.3s ease;
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  color: var(--green);
+}
+
+.search-box {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #0e0e0e;
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.quick-help {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card:hover {
+  border-color: rgba(182,255,46,0.4);
+  box-shadow: 0 0 25px rgba(182,255,46,0.15);
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #111;
+  color: white;
+  margin-top: 10px;
+}
+
+
+
+.help-item {
+  margin-bottom: 12px;
+   padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  transition: 0.25s ease;
+}
+
+.help-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-green);
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+}
+
+.faq-item {
+    border-radius: 14px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+
+.faq-question {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--green);
+}
+
+.faq-answer {
+  display: none;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rules li {
+  margin-bottom: 8px;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.rules li {
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+/* 🌟 ECO TIP FEATURE */
+#ecoTip {
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(182,255,46,0.08);
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(182,255,46,0.3);
+  box-shadow: var(--shadow-green);
+  line-height: 1.5;
+}
+
+/* 📐 GRID FIX */
+.support-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+  margin-top: 20px;
+}
+
+/* 📱 MOBILE */
+@media(max-width:900px){
+  .support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-help {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:900px){
+  .support-grid{
+    grid-template-columns:1fr;
+  }
+}
