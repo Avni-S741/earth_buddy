@@ -131,32 +131,37 @@ function renderTasks(tasks) {
       btn.disabled = true;
       const oldText = btn.textContent;
       btn.textContent = "Uploading...";
+try {
+  console.log("🚀 Sending request for task:", taskId);
 
-      try {
-        const response = await fetch(`${API_BASE}/tasks/complete`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          body: formData
-        });
+  const response = await fetch(`${API_BASE}/tasks/complete`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  });
 
-        const data = await response.json();
+  console.log("✅ Response status:", response.status);
 
-        if (!response.ok) {
-          throw new Error(data.detail || data.msg || "Upload failed");
-        }
+  const data = await response.json();
+  console.log("📦 Response data:", data);
 
-        if (data.verified) {
-          setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
-          fileInput.value = "";
-          fileLabel(taskId, "");
-        } else {
-          setStatus(taskId, data.msg || "Rejected", "error");
-        }
-      } catch (err) {
-        setStatus(taskId, err.message, "error");
-      } finally {
+  if (!response.ok) {
+    throw new Error(data.detail || data.msg || data.error || "Upload failed");
+  }
+
+  if (data.verified) {
+    setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
+  } else {
+    setStatus(taskId, data.msg || "Rejected", "error");
+  }
+
+} catch (err) {
+  console.error("❌ Upload error:", err);
+  setStatus(taskId, err.message, "error");
+}
+       finally {
         btn.disabled = false;
         btn.textContent = oldText;
       }
