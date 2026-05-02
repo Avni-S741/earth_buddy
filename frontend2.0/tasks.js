@@ -165,6 +165,10 @@ try {
     btn.disabled = false;
     btn.textContent = oldText;
 }
+    });   // closes addEventListener click callback
+  });     // closes querySelectorAll forEach
+
+}         // closes renderTasks function
 
 async function loadTasks() {
   if (!token) {
