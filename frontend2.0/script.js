@@ -27,7 +27,7 @@ if (savedToken) {
     const currentTime = Date.now() / 1000;
 
     if (decoded.exp > currentTime) {
-      window.location.href = "leaderboard.html";
+      window.location.href = "tasks.html";
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
@@ -71,6 +71,7 @@ loginForm.addEventListener("submit", async (e) => {
     });
 
     const data = await response.json();
+    localStorage.setItem("token", data.access_token);
 
     if (data.access_token) {
       localStorage.setItem("token", data.access_token);
@@ -78,7 +79,7 @@ loginForm.addEventListener("submit", async (e) => {
       loginMessage.style.color = "#b6ff2e";
       loginMessage.textContent = "Login successful!";
       setTimeout(() => {
-    window.location.href = "leaderboard.html";
+    window.location.href = "tasks.html";
   }, 1000); 
 
     } else {
