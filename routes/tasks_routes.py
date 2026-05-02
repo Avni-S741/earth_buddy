@@ -44,8 +44,12 @@ def complete_task(task_id:int=Form(...),
                   image: UploadFile=File(...),
                   current_user: str= Depends(verify_token)):
     image_path = f"{UPLOAD_FOLDER}/{current_user}_{task_id}_{image.filename}"
+    content=image.file.read()
+    if not content:
+        return{"verified":False,"msg":"Empty / Corrupted file...."}
+    
     with open(image_path, "wb") as f:
-        f.write(image.file.read())
+        f.write(content)
 
     compressed_path = compress_image(image_path)
     with open(compressed_path, "rb") as img:
@@ -58,9 +62,11 @@ def complete_task(task_id:int=Form(...),
         },
         files={"media": img}
     )
-
-    result = response.json()
-    ai_score = result.get("type", {}).get("ai_generated", 1)
+    try:
+        result = response.json()
+        ai_score = result.get("type", {}).get("ai_generated", 1)
+    except:
+        return {"verified":False,"msg":"AI check failed"}
 
     if ai_score < 0.5:  # less than 50% AI probability = real
     # award points
