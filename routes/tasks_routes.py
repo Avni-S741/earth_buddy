@@ -8,7 +8,8 @@ from auth import verify_token
 
 router=APIRouter()
 
-AIORNOT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJlYWMzYzYwLWI2MGUtNDI3OS05MTNjLWZmODk3YWVmYjFiOCIsInVzZXJfaWQiOiIwZWI1YzVmNy0wZTM4LTQ4YWItYjNkNi1lMTE0NjRlMzAxZjEiLCJhdWQiOiJhY2Nlc3MiLCJleHAiOjE5OTgwODY0MDAsInNjb3BlIjoiYWxsIn0.XDA8L8BALJSPWq6q9SAITVGGIdPYmjWtDEhIZzLEbgo"
+your_api_user=518199246
+your_api_secret="vdBPyZwFEbP5E73HXKuQxVNTLMP7eBKZ"
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -48,15 +49,21 @@ def complete_task(task_id:int=Form(...),
 
     compressed_path = compress_image(image_path)
     with open(compressed_path, "rb") as img:
-        response=requests.post(
-            "https://api.aiornot.com/v1/reports/image",
-            headers={"Authorization": f"Bearer {AIORNOT_API_KEY}"},
-            files={"object": img}
-        )
-        result=response.json()
-        verdict=result.get("report",{}).get("verdict","ai")
+       response = requests.post(
+        "https://api.sightengine.com/1.0/check.json",
+        data={
+            "models": "genai",
+            "api_user": your_api_user,
+            "api_secret": your_api_secret
+        },
+        files={"media": img}
+    )
 
-    if verdict=="human":
+    result = response.json()
+    ai_score = result.get("type", {}).get("ai_generated", 1)
+
+    if ai_score < 0.5:  # less than 50% AI probability = real
+    # award points
         connect_db=make_connection()
         cursor=connect_db.cursor()
 
