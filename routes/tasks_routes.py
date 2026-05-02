@@ -38,7 +38,7 @@ def get_all_tasks (current_user: str= Depends(verify_token)):
 # }).then(r => r.json()).then(d => console.log(d))
 
 
-@router.post("/complete")
+@router.post("/complete/")
 def complete_task(task_id:int=Form(...),
                   image: UploadFile=File(...),
                   current_user: str= Depends(verify_token)):
