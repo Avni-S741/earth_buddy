@@ -94,7 +94,7 @@ function renderTasks(tasks) {
       if (!isValidJpeg(file)) {
         input.value = "";
         fileLabel(taskId, "");
-        setStatus(taskId, "Only JPG/JPEG allowed", "error");
+         alert("Please select a valid JPG/JPEG file");
         return;
       }
 
@@ -154,8 +154,10 @@ try {
 
     if (data.verified) {
         setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
+        alert("AI verification successful! Congrats!! points granted");
     } else {
         setStatus(taskId, data.msg || "Rejected", "error");
+        alert("Invalid submission, AI verification failed");
     }
 
 } catch (err) {
