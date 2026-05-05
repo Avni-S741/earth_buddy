@@ -36,7 +36,7 @@ def get_profile(current_user:str=Depends(verify_token)):
     if total_points >= 500:
         badges.append("Eco Initiate")
     if total_points >= 1500:
-        badges.append("Green Gaurdian")
+        badges.append("Green Guardian")
     if total_points >= 3500:
         badges.append("Earth Defender")
     if total_points >= 5000:

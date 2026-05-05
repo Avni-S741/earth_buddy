@@ -40,10 +40,23 @@ async function loadProfile() {
     document.getElementById("points").textContent = data.total_points;
 
     // badges
-    const badgesDiv = document.getElementById("badgesList");
-    badgesDiv.innerHTML = data.badges.length
-      ? data.badges.map(b => `<span>${b}</span>`).join("")
-      : "No badges yet";
+   // Map badge names to image files
+const badgeImages = {
+  "Eco Initiate": "images/eco-initiate.png",
+  "Green Guardian": "images/green-guardian.png",
+  "Earth Defender": "images/earth-defender.png",
+  "Planet Protector": "images/planet-protector.png"
+};
+
+const badgesDiv = document.getElementById("badgesList");
+badgesDiv.innerHTML = data.badges.length
+  ? data.badges
+      .map(badge => {
+        const src = badgeImages[badge] || "";
+        return `<img src="${src}" alt="${badge}" title="${badge}" class="badge-icon" />`;
+      })
+      .join("")
+  : "No badges yet";
 
     // tasks
     const tasksDiv = document.getElementById("tasksList");
