@@ -68,26 +68,55 @@ def complete_task(task_id:int=Form(...),
     except:
         return {"verified":False,"msg":"AI check failed"}
 
-    if ai_score < 0.5:  # less than 50% AI probability = real
-    # award points
-        connect_db=make_connection()
-        cursor=connect_db.cursor()
+    if ai_score < 0.5:  # real photo
+        connect_db = make_connection()
+        cursor = connect_db.cursor()
 
-        cursor.execute("SELECT id FROM users WHERE username=?",(current_user,))
-        user=cursor.fetchone()
+        # Get user id
+        cursor.execute("SELECT id FROM users WHERE username=?", (current_user,))
+        user = cursor.fetchone()
 
-        cursor.execute("SELECT points FROM tasks WHERE id=?",(task_id,))
-        task=cursor.fetchone()
+        # Get task points
+        cursor.execute("SELECT points FROM tasks WHERE id=?", (task_id,))
+        task = cursor.fetchone()
 
-        cursor.execute("INSERT INTO completions(user_id,task_id,image,verified) VALUES (?,?,?,?)", (user["id"], task_id, image_path, 1))
+        # Get current total points BEFORE insertion
+        cursor.execute("""
+            SELECT COALESCE(SUM(t.points), 0)
+            FROM completions c
+            JOIN tasks t ON c.task_id = t.id
+            WHERE c.user_id = ? AND c.verified = 1
+            """, (user["id"],))
+        current_total = cursor.fetchone()[0]
+        new_total = current_total + task["points"]
 
+        # Insert the completion
+        cursor.execute(
+            "INSERT INTO completions(user_id, task_id, image, verified) VALUES (?,?,?,?)",
+            (user["id"], task_id, image_path, 1)
+        )
         connect_db.commit()
+
+        # Determine new badges
+        badge_thresholds = [
+            (500, "Eco Initiate"),
+            (1500, "Green Guardian"),
+            (3500, "Earth Defender"),
+            (5000, "Planet Protector"),
+        ]
+        new_badges = []
+        for threshold, badge_name in badge_thresholds:
+            if current_total < threshold and new_total >= threshold:
+                new_badges.append(badge_name)
+
         connect_db.close()
 
-        return {"verified": True, "points_earned":task["points"]}
-    else:
-        return {"verified": False, "msg":"Image appears ai. Hence no points will be awarded..."}
-    
+        return {
+            "verified": True,
+            "points_earned": task["points"],
+            "total_points": new_total,
+            "new_badges": new_badges
+        }
 
 # const formData = new FormData()
 # formData.append("task_id", 1)
