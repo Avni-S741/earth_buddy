@@ -1,8 +1,10 @@
 const API_BASE = "http://127.0.0.1:8000";
 const taskCount = document.getElementById("taskCount");
-
 const token = localStorage.getItem("token");
 
+// ========================
+// Helper functions
+// ========================
 function escapeHtml(text) {
   return String(text)
     .replaceAll("&", "&amp;")
@@ -26,10 +28,16 @@ function fileLabel(taskId, fileName) {
 
 function isValidJpeg(file) {
   const nameOk = /\.(jpe?g)$/i.test(file.name);
-  const typeOk = file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "";
+  const typeOk =
+    file.type === "image/jpeg" ||
+    file.type === "image/jpg" ||
+    file.type === "";
   return nameOk && typeOk;
 }
 
+// ========================
+// Render tasks as cards
+// ========================
 function renderTasks(tasks) {
   const tasksGrid = document.getElementById("tasksGrid");
   if (!tasksGrid) return;
@@ -42,7 +50,9 @@ function renderTasks(tasks) {
 
   taskCount.textContent = `${tasks.length} tasks`;
 
-  tasksGrid.innerHTML = tasks.map(task => `
+  tasksGrid.innerHTML = tasks
+    .map(
+      task => `
     <div class="task-card">
       <div class="card-header">
         <span class="category-chip">${escapeHtml(task.category)}</span>
@@ -71,9 +81,13 @@ function renderTasks(tasks) {
         <span class="status-chip pending" id="status-${task.id}">Pending</span>
       </div>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 
-  // Re‑attach event listeners (same logic as before)
+  // ========================
+  // Attach event listeners
+  // ========================
   document.querySelectorAll('[data-action="choose"]').forEach(btn => {
     btn.addEventListener("click", () => {
       const taskId = btn.getAttribute("data-task-id");
@@ -81,24 +95,26 @@ function renderTasks(tasks) {
     });
   });
 
-  document.querySelectorAll('input[type="file"][id^="file-"]').forEach(input => {
-    input.addEventListener("change", () => {
-      const taskId = input.id.replace("file-", "");
-      const file = input.files[0];
-      if (!file) {
-        fileLabel(taskId, "");
-        return;
-      }
-      if (!isValidJpeg(file)) {
-        input.value = "";
-        fileLabel(taskId, "");
-        alert("incorrect image format");
-        return;
-      }
-      fileLabel(taskId, file.name);
-      setStatus(taskId, "Ready to upload", "pending");
+  document
+    .querySelectorAll('input[type="file"][id^="file-"]')
+    .forEach(input => {
+      input.addEventListener("change", () => {
+        const taskId = input.id.replace("file-", "");
+        const file = input.files[0];
+        if (!file) {
+          fileLabel(taskId, "");
+          return;
+        }
+        if (!isValidJpeg(file)) {
+          input.value = "";
+          fileLabel(taskId, "");
+          alert("Incorrect image format. Please select a JPG or JPEG file.");
+          return;
+        }
+        fileLabel(taskId, file.name);
+        setStatus(taskId, "Ready to upload", "pending");
+      });
     });
-  });
 
   document.querySelectorAll('[data-action="submit"]').forEach(btn => {
     btn.addEventListener("click", async () => {
@@ -108,14 +124,17 @@ function renderTasks(tasks) {
 
       if (!token) {
         setStatus(taskId, "Missing login token", "error");
+        alert("You're not logged in. Please log in again.");
         return;
       }
       if (!file) {
         setStatus(taskId, "Please choose a JPG/JPEG file", "error");
+        alert("Please select a file to upload.");
         return;
       }
       if (!isValidJpeg(file)) {
         setStatus(taskId, "Only JPG/JPEG allowed", "error");
+        alert("Incorrect image format. Only JPG/JPEG is allowed.");
         return;
       }
 
@@ -131,29 +150,32 @@ function renderTasks(tasks) {
         const response = await fetch(`${API_BASE}/tasks/complete`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
-          body: formData
+          body: formData,
         });
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.detail || "Upload failed");
+          throw new Error(data.detail || data.msg || "Upload failed");
         }
 
         if (data.verified) {
           setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
-          alert(`congrats! points granted (+${data.points_earned} pts)`);
-          // 🏆 Check for new badges
+          alert(`🎉 Congrats! Points granted (+${data.points_earned} pts)`);
+
+          // Check for new badges
           if (data.new_badges && data.new_badges.length > 0) {
             data.new_badges.forEach(badge => {
-              alert(`New badge unlocked: ${badge} !`);
+              alert(`🏆 New badge unlocked: ${badge}!`);
             });
           }
         } else {
           setStatus(taskId, data.msg || "Rejected", "error");
-          alert("invalid submission, AI verification failed");
+          alert("❌ Invalid submission, AI verification failed.");
         }
       } catch (err) {
+        console.error("Upload error:", err);
         setStatus(taskId, err.message, "error");
+        alert("Upload error: " + err.message);
       } finally {
         btn.disabled = false;
         btn.textContent = oldText;
@@ -162,111 +184,12 @@ function renderTasks(tasks) {
   });
 }
 
-  document.querySelectorAll('[data-action="choose"]').forEach(btn => {
-    btn.addEventListener("click", () => {
-      const taskId = btn.getAttribute("data-task-id");
-      document.getElementById(`file-${taskId}`).click();
-    });
-  });
-
-  document.querySelectorAll('input[type="file"][id^="file-"]').forEach(input => {
-    input.addEventListener("change", () => {
-      const taskId = input.id.replace("file-", "");
-      const file = input.files[0];
-      if (!file) {
-        fileLabel(taskId, "");
-        return;
-      }
-
-      if (!isValidJpeg(file)) {
-        input.value = "";
-        fileLabel(taskId, "");
-         alert("Please select a valid JPG/JPEG file");
-        return;
-      }
-
-      fileLabel(taskId, file.name);
-      setStatus(taskId, "Ready to upload", "pending");
-    });
-  });
-
-  document.querySelectorAll('[data-action="submit"]').forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const taskId = btn.getAttribute("data-task-id");
-      const fileInput = document.getElementById(`file-${taskId}`);
-      const file = fileInput.files[0];
-
-      if (!token) {
-        setStatus(taskId, "Missing login token", "error");
-        return;
-      }
-
-      if (!file) {
-        setStatus(taskId, "Please choose a JPG/JPEG file", "error");
-        return;
-      }
-
-      if (!isValidJpeg(file)) {
-        setStatus(taskId, "Only JPG/JPEG allowed", "error");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("task_id", taskId);
-      formData.append("image", file);
-
-      btn.disabled = true;
-      const oldText = btn.textContent;
-      btn.textContent = "Uploading...";
-
-try {
-    console.log("Sending request for task:", taskId);
-
-    const response = await fetch(`${API_BASE}/tasks/complete`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-        body: formData
-    });
-
-    console.log("Response status:", response.status);
-
-    const data = await response.json();
-    console.log("Response data:", data);
-
-    if (!response.ok) {
-        throw new Error(data.detail || data.msg || data.error || "Upload failed");
-    }
-
-    if (data.verified) {
-        setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
-        alert("AI verification successful! Congrats!! points granted");
-        // 🏆 Check for new badges
-    if (data.new_badges && data.new_badges.length > 0) {
-        data.new_badges.forEach(badge => {
-            alert(`New badge unlocked: ${badge} !`);
-        });
-    } 
-    } else {
-        setStatus(taskId, data.msg || "Rejected", "error");
-        alert("Invalid submission, AI verification failed");
-    }
-
-} catch (err) {
-    console.error("Upload error:", err);
-    setStatus(taskId, err.message, "error");
-} finally {
-    btn.disabled = false;
-    btn.textContent = oldText;
-}
-    });   // closes addEventListener click callback
-  });     // closes querySelectorAll forEach
-
-       // closes renderTasks function
-
+// ========================
+// Load tasks on page load
+// ========================
 async function loadTasks() {
   if (!token) {
+    const tasksGrid = document.getElementById("tasksGrid");
     tasksGrid.innerHTML = `<p class="loading-cell">Please log in to view tasks.</p>`;
     taskCount.textContent = "Login required";
     return;
@@ -274,23 +197,16 @@ async function loadTasks() {
 
   try {
     const response = await fetch(`${API_BASE}/tasks/all`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: { Authorization: `Bearer ${token}` },
     });
-
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.detail || "Failed to load tasks");
-    }
-
+    if (!response.ok) throw new Error(data.detail || "Failed to load tasks");
     renderTasks(data.tasks || []);
   } catch (err) {
+    const tasksGrid = document.getElementById("tasksGrid");
     tasksGrid.innerHTML = `<p class="loading-cell">${escapeHtml(err.message)}</p>`;
     taskCount.textContent = "Error";
   }
 }
 
 loadTasks();
-    
