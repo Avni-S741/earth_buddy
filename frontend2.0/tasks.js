@@ -147,7 +147,7 @@ function renderTasks(tasks) {
       btn.textContent = "Uploading...";
 
       try {
-        const response = await fetch(`${API_BASE}/tasks/complete`, {
+        const response = await fetch(`${API_BASE}/tasks/complete/`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
