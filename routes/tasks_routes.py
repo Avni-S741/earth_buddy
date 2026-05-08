@@ -117,6 +117,12 @@ def complete_task(task_id:int=Form(...),
             "total_points": new_total,
             "new_badges": new_badges
         }
+    
+    else:
+        return {
+            "verified": False,
+            "msg": "Image appears AI generated. No points awarded."
+        }
 
 # const formData = new FormData()
 # formData.append("task_id", 1)

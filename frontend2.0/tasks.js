@@ -154,6 +154,9 @@ function renderTasks(tasks) {
         });
         const data = await response.json();
 
+        console.log("verified:", data.verified)
+        console.log("points:", data.points_earned)
+
         if (!response.ok) {
           throw new Error(data.detail || data.msg || "Upload failed");
         }
