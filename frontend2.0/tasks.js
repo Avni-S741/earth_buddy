@@ -145,17 +145,23 @@ function renderTasks(tasks) {
       btn.disabled = true;
       const oldText = btn.textContent;
       btn.textContent = "Uploading...";
-
+      console.log("BEFORE FETCH....")
       try {
         const response = await fetch(`${API_BASE}/tasks/complete/`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
-        });
+        
+        
+      });
+      console.log("AFTER FETCH....")
         const data = await response.json();
 
         console.log("verified:", data.verified)
         console.log("points:", data.points_earned)
+
+        console.log("status:", response.status);
+        console.log("data:", data);
 
         if (!response.ok) {
           throw new Error(data.detail || data.msg || "Upload failed");
