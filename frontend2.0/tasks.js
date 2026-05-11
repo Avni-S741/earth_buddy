@@ -171,15 +171,18 @@ function renderTasks(tasks) {
               alert(`🏆 New badge unlocked: ${badge}!`);
             });
           }
-        } else {
+        } 
+        else {
           setStatus(taskId, data.msg || "Rejected", "error");
           alert("❌ Invalid submission, AI verification failed.");
         }
-      } catch (err) {
+      } 
+      catch (err) {
         console.error("Upload error:", err);
         setStatus(taskId, err.message, "error");
         alert("Upload error: " + err.message);
-      } finally {
+      } 
+      finally {
         btn.disabled = false;
         btn.textContent = oldText;
       }
