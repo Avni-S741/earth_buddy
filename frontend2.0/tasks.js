@@ -145,42 +145,38 @@ function renderTasks(tasks) {
       btn.disabled = true;
       const oldText = btn.textContent;
       btn.textContent = "Uploading...";
-      console.log("BEFORE FETCH....")
       try {
         const response = await fetch(`${API_BASE}/tasks/complete/`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
-        
-        
-      });
-      console.log("AFTER FETCH....")
-        const data = await response.json();
+        });
 
-        console.log("verified:", data.verified)
-        console.log("points:", data.points_earned)
-
-        console.log("status:", response.status);
-        console.log("data:", data);
-
+        // Check HTTP status FIRST before parsing JSON
         if (!response.ok) {
-          throw new Error(data.detail || data.msg || "Upload failed");
+          const errText = await response.text();
+          console.error("Server error response:", response.status, errText);
+          throw new Error(`Server error ${response.status}: ${errText}`);
         }
 
-        if (data.verified) {
+        const data = await response.json();
+        console.log("Full response:", JSON.stringify(data));
+        console.log("verified:", data.verified);
+        console.log("points_earned:", data.points_earned);
+
+        if (data.verified == true) {
           setStatus(taskId, `Verified +${data.points_earned} pts`, "success");
+          alert("hello its perfect!!");
           alert(`🎉 Congrats! Points granted (+${data.points_earned} pts)`);
 
-          // Check for new badges
           if (data.new_badges && data.new_badges.length > 0) {
             data.new_badges.forEach(badge => {
               alert(`🏆 New badge unlocked: ${badge}!`);
             });
           }
-        } 
-        else {
+        } else {
           setStatus(taskId, data.msg || "Rejected", "error");
-          alert("❌ Invalid submission, AI verification failed.");
+          alert("❌ Submission rejected. Image may be AI-generated.");
         }
       } 
       catch (err) {

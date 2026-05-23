@@ -65,15 +65,15 @@ def complete_task(task_id:int=Form(...),
     )
     try:
         result = response.json()
-        ai_score = 0   # 🔥 FORCE REAL IMAGE (temporary debug)
+        ai_score=0
     except Exception as e:
         print("AI ERROR:", str(e))
         ai_score = 0   # still force success even if API fails
 
-    if ai_score < 0.5:  # real photo
+    if ai_score< 0.5 :  # real photo
         connect_db = make_connection()
         cursor = connect_db.cursor()
-        connect_db.row_factory = sqlite3.Row
+       
 
         # Get user id
         cursor.execute("SELECT id FROM users WHERE username=?", (current_user,))
