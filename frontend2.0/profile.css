@@ -33,9 +33,7 @@ a {
   text-decoration: none;
 }
 
-/* =============================================
-   HEADER (same structure, refined glow)
-============================================= */
+
 .app-name {
   font-family: 'Comfortaa', sans-serif;
   font-weight: 700;
@@ -131,8 +129,8 @@ a {
 
   .header-bottom h2 {
   font-family: 'Audiowide', cursive;
-  font-size: 4.2rem;                    /* big statement */
-  font-weight: 400;                     /* Audiowide works best with regular weight */
+  font-size: 4.2rem;                    
+  font-weight: 400;                     
   text-transform: uppercase;
   letter-spacing: 4px;
   background: linear-gradient(
@@ -163,9 +161,9 @@ a {
 }
 
 
-/* =============================================
+/* 
    PROFILE CONTAINER – GRID LAYOUT
-============================================= */
+ */
 .profile-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -180,9 +178,9 @@ a {
   }
 }
 
-/* =============================================
+/* 
    CARDS – NEON BORDER, GRADIENT BG, GLOW
-============================================= */
+ */
 .profile-card,
 .badges-card,
 .tasks-card {
@@ -201,9 +199,9 @@ a {
   box-shadow: 0 0 20px rgba(255, 79, 216, 0.3), 0 0 35px rgba(182, 255, 46, 0.2);
 }
 
-/* =============================================
+/* 
    PROFILE CARD – BIG NAME, GLOWING TEXT
-============================================= */
+ */
 .profile-card h2 {
   font-size: 2.8rem;
   font-weight: 800;
@@ -229,9 +227,9 @@ a {
   word-break: break-all;
 }
 
-/* =============================================
+/* 
    POINTS – LARGE COUNTER WITH GLOW
-============================================= */
+ */
 .stats {
   margin-top: 20px;
 }
@@ -271,9 +269,9 @@ a {
   color: var(--muted);
 }
 
-/* =============================================
+/* 
    BADGES CARD – GRID WITH TILT ON HOVER
-============================================= */
+*/
 .badges-card h3,
 .tasks-card h3 {
   font-size: 1.6rem;
@@ -303,9 +301,9 @@ a {
   box-shadow: 0 0 30px rgba(182, 255, 46, 0.8);
 }
 
-/* =============================================
+/* 
    COMPLETED TASKS – SCROLLABLE GLASS LIST
-============================================= */
+ */
 .tasks-card {
   grid-column: span 2; /* take full width in grid */
 }
@@ -355,9 +353,9 @@ a {
   opacity: 0.7;
 }
 
-/* =============================================
+/* 
    LOGOUT BUTTON – FLUORESCENT PULSE
-============================================= */
+ */
 .logout-btn {
   display: block;
   width: fit-content;
@@ -389,9 +387,7 @@ a {
   100% { box-shadow: 0 0 15px rgba(255, 79, 216, 0.4); }
 }
 
-/* =============================================
-   RESPONSIVE TWEAKS
-============================================= */
+
 @media (max-width: 768px) {
   .tasks-card {
     grid-column: span 1;

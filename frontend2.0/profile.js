@@ -10,7 +10,7 @@ function parseJwt(token) {
 
 const token = localStorage.getItem("token");
 
-// 🔐 Protect page
+
 if (!token) {
   window.location.href = "index.html";
 }
@@ -39,8 +39,7 @@ async function loadProfile() {
     document.getElementById("email").textContent = data.email;
     document.getElementById("points").textContent = data.total_points;
 
-    // badges
-   // Map badge names to image files
+    
 const badgeImages = {
   "Eco Initiate": "images/eco-initiate.png",
   "Green Guardian": "images/green-guardian.png",
@@ -58,7 +57,7 @@ badgesDiv.innerHTML = data.badges.length
       .join("")
   : "No badges yet";
 
-    // tasks
+    
     const tasksDiv = document.getElementById("tasksList");
     tasksDiv.innerHTML = data.completed_tasks.length
       ? data.completed_tasks.map(t => `
@@ -72,7 +71,7 @@ badgesDiv.innerHTML = data.badges.length
     console.error(err);
   }
 }
-// 🔓 Logout
+
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("username");

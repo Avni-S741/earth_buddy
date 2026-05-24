@@ -54,7 +54,7 @@ a {
   min-height: 100vh;
   padding: 18px;
 }
-/* 🌍 BRAND SECTION */
+
 
 .brand-section {
   display: flex;
@@ -87,7 +87,7 @@ a {
   letter-spacing: 0.5px;
 }
 
-/* PAGE TITLE */
+
 .page-title h2 {
   margin: 0;
   font-size: 1.8rem;
@@ -105,7 +105,7 @@ a {
   box-shadow: var(--shadow-pink);
 }
 
-/* 🔝 TOP ROW */
+
 .header-top {
   display: flex;
   margin-top: 15px;
@@ -155,8 +155,8 @@ a {
 
 .header-bottom h2 {
   font-family: 'Audiowide', cursive;
-  font-size: 4.2rem;                    /* big statement */
-  font-weight: 400;                     /* Audiowide works best with regular weight */
+  font-size: 4.2rem;                    
+  font-weight: 400;                     
   text-transform: uppercase;
   letter-spacing: 4px;
   background: linear-gradient(
@@ -175,7 +175,7 @@ a {
           drop-shadow(0 0 8px rgba(182, 255, 46, 0.6));
 }
 
-/* Animations for the header */
+
 @keyframes neonMove {
   0% { background-position: 0% center; }
   100% { background-position: 200% center; }

@@ -21,7 +21,7 @@ const tips = [
   "Reuse water from washing vegetables for plants."
 ];
 
-// change daily
+
 const today = new Date().getDate();
 const tip = tips[today % tips.length];
 

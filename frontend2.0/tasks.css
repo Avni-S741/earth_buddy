@@ -32,7 +32,7 @@ a { color: inherit; text-decoration: none; }
 
 .page-shell { width: 100%; min-height: 100vh; padding: 18px; }
 
-/* HEADER (unchanged from your original, but we'll keep it) */
+
 .top-header {
   padding: 22px 32px;
   margin-bottom: 18px;
@@ -146,7 +146,7 @@ a { color: inherit; text-decoration: none; }
   align-items: start;
 }
 
-/* TASK CARD CONTAINER */
+
 .task-table-card {
   background: var(--panel);
   border: 1px solid var(--line);

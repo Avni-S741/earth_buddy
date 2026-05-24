@@ -132,7 +132,7 @@
   line-height: 1.5;
 }
 
-/* 📐 GRID FIX */
+
 .support-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -140,7 +140,7 @@
   margin-top: 20px;
 }
 
-/* 📱 MOBILE */
+
 @media(max-width:900px){
   .support-grid {
     grid-template-columns: 1fr;

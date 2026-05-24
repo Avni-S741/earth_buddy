@@ -2,9 +2,6 @@ const API_BASE = "http://127.0.0.1:8000";
 const taskCount = document.getElementById("taskCount");
 const token = localStorage.getItem("token");
 
-// ========================
-// Helper functions
-// ========================
 
 
 function escapeHtml(text) {
@@ -42,9 +39,7 @@ function isValidJpeg(file) {
   return nameOk && typeOk;
 }
 
-// ========================
-// Render Tasks
-// ========================
+
 function renderTasks(tasks) {
   const tasksGrid = document.getElementById("tasksGrid");
 
@@ -124,9 +119,7 @@ function renderTasks(tasks) {
     </div>
   `).join("");
 
-  // ========================
-  // Choose file
-  // ========================
+  
   document.querySelectorAll('[data-action="choose"]').forEach(btn => {
 
     btn.onclick = async (e) => {
@@ -140,9 +133,7 @@ function renderTasks(tasks) {
 
   });
 
-  // ========================
-  // File change
-  // ========================
+  
   document
     .querySelectorAll('input[type="file"][id^="file-"]')
     .forEach(input => {
@@ -175,9 +166,7 @@ function renderTasks(tasks) {
 
     });
 
-  // ========================
-  // Upload submit
-  // ========================
+  
   document.querySelectorAll('[data-action="submit"]').forEach(btn => {
 
     btn.onclick = async (e) => {
@@ -327,9 +316,7 @@ function renderTasks(tasks) {
   });
 }
 
-// ========================
-// Load Tasks
-// ========================
+
 async function loadTasks() {
 
   if (!token) {

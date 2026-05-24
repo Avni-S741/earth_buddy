@@ -10,10 +10,10 @@ const yourRankEl = document.getElementById("yourRank");
 const errorBox = document.getElementById("errorBox");
 const refreshBtn = document.getElementById("refreshBtn");
 
-// 🔐 Get token (assuming you stored it after login)
+
 const token = localStorage.getItem("token");
 
-// 🚀 Fetch leaderboard
+
 async function fetchLeaderboard() {
   try {
     errorBox.classList.add("hidden");
@@ -38,7 +38,7 @@ async function fetchLeaderboard() {
   }
 }
 
-// 📊 Render full table
+
 function renderLeaderboard(data) {
     const currentUsername = localStorage.getItem("username");
     leaderboardBody.innerHTML = "";
@@ -51,25 +51,25 @@ function renderLeaderboard(data) {
     data.forEach(user => {
         const row = document.createElement("tr");
         
-        // Add rank cell
+        
         const rankCell = document.createElement("td");
         rankCell.className = "rank-cell";
         rankCell.textContent = `#${user.rank}`;
         row.appendChild(rankCell);
         
-        // Add username cell
+        
         const usernameCell = document.createElement("td");
         usernameCell.className = "username-cell";
         usernameCell.textContent = user.username;
         row.appendChild(usernameCell);
         
-        // Add points cell
+        
         const pointsCell = document.createElement("td");
         pointsCell.className = "points-cell";
         pointsCell.textContent = user.total_points;
         row.appendChild(pointsCell);
         
-        // Highlight current user's row
+        
         if (user.username === currentUsername) {
             row.style.backgroundColor = "rgba(182, 255, 46, 0.15)";
             row.style.borderLeft = "3px solid #b6ff2e";
@@ -79,7 +79,7 @@ function renderLeaderboard(data) {
     });
 }
 
-// 🏆 Top 3 cards
+
 function renderTopThree(data) {
   topThreeCards.innerHTML = "";
 
@@ -100,7 +100,7 @@ function renderTopThree(data) {
   });
 }
 
-// 📈 Stats
+
 function renderStats(data) {
   totalUsersEl.textContent = data.length;
 
@@ -108,7 +108,7 @@ function renderStats(data) {
     topScoreEl.textContent = data[0].total_points;
   }
 
-  // 🧠 Find current user's rank
+  
   const currentUsername = localStorage.getItem("username");
 
   const user = data.find(u => u.username === currentUsername);
@@ -120,14 +120,14 @@ function renderStats(data) {
   }
 }
 
-// ❌ Error handler
+
 function showError(message) {
   errorBox.textContent = message;
   errorBox.classList.remove("hidden");
 }
 
-// 🔄 Refresh button
+
 refreshBtn.addEventListener("click", fetchLeaderboard);
 
-// 🚀 Initial load
+
 fetchLeaderboard();
