@@ -90,8 +90,10 @@ To further enhance the community aspect, the following features are in the pipel
 - 💬 **User Forum / Community:** A dedicated space for sharing experiences, ideas, and sustainability tips.
 - 🌱 **User-Generated Content:** Allowing users to post about their personal sustainable activities and campaigns.
 - 📊 **Carbon Footprint Tracker:** Get tangible feedback by tracking the total emissions you've reduced compared to the global average.
-- 🤖 **AI Task Correctness Verification:** Improve AI verification system using computer vision/object detection models to verify whether     
-     uploaded images actually match the ecological task being completed.
+- 🌐 **Deployment:**The project currently runs locally using FastAPI and SQLite.
+     Deployment is planned for a future update.
+- 🤖 **AI Task Correctness Verification:** Improve AI verification system using computer vision/object
+     detection models to verify whether uploaded images actually match the ecological task being completed.
 
 ---
 
