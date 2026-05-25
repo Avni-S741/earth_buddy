@@ -23,7 +23,7 @@ Millions of individuals worldwide lack clear, personalized guidance and motivati
 
 * 📝 **Curated Task Lists:** Complete categorized actions (transportation, energy, consumption) to minimize your carbon footprint.
 * 📸 **AI Image Verification:** Integrated Sightengine AI to accurately verify user task submissions and distinguish real photos from generated images.
-* 🏆 **Monthly Leaderboards:** Foster healthy competition and community engagement by tracking your progress against others.
+* 🏆 **Leaderboards:** Foster healthy competition and community engagement by tracking your progress against others.
 * 🏅 **Badges & Points:** Earn visual rewards that signify your achievements and long-term commitment to sustainability.
 * 💻 **Admin Dashboard:** Seamless task management, event creation, and user engagement monitoring, including Top Performer Recognition.
 * 🌐 **Social Sharing:** Share your achievements easily to inspire others and raise global awareness.
@@ -90,15 +90,16 @@ To further enhance the community aspect, the following features are in the pipel
 - 💬 **User Forum / Community:** A dedicated space for sharing experiences, ideas, and sustainability tips.
 - 🌱 **User-Generated Content:** Allowing users to post about their personal sustainable activities and campaigns.
 - 📊 **Carbon Footprint Tracker:** Get tangible feedback by tracking the total emissions you've reduced compared to the global average.
-- 
+- 🤖 **AI Task Correctness Verification:** Improve AI verification system using computer vision/object detection models to verify whether     
+     uploaded images actually match the ecological task being completed.
 
 ---
 
 ## 🧑‍💻 Team Members
 
-- **Akshat Jain (Leader)** – Frontend Developer
-- **Avni Shrivastava (Member)** – Backend Developer
+- **Akshat Jain** – Frontend Developer
+- **Avni Shrivastava** – Backend Developer
 
 ---
 
-Built with 💚 for a sustainable future.
+Built with 💛 for a sustainable future.
