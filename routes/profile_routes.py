@@ -23,7 +23,7 @@ def get_profile(current_user:str=Depends(verify_token)):
     total_points = points_row["total_points"] or 0
 
     cursor.execute("""
-        SELECT t.title, t.category, t.points, c.completed_at
+        SELECT t.title, t.category, t.points, t.impact, c.completed_at
         FROM completions c
         JOIN tasks t ON c.task_id = t.id
         WHERE c.user_id = (SELECT id FROM users WHERE username = ?)
